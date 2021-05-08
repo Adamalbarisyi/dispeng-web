@@ -14,7 +14,7 @@
               <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data HUKDIS</li>
+                <li class="breadcrumb-item active" aria-current="page">HUKDIS</li>
               </ol>
             </nav>
           </div>
@@ -28,49 +28,87 @@
               <div class="card-header border-0">
                 <div class="row">
                   <div class="col-6">
-                    <h3 class="mb-0">Data HUKDIS</h3>
+                    <h3 class="mb-0">HUKDIS</h3>
+                  </div>
+                  <div>
+                    <p class="text-danger mt-4"><?php echo $this->session->flashdata('msg'); ?></p>
+                  </div>
+                  <div class="col-6">
+                    <div class="float-right">
+                      <a href="<?= base_url() . 'user/user_hukdis/form' ?>">
+                        <button type="button" class="table-action btn btn-sm btn-warning text-white">
+                          <i class="ni ni-fat-add fa-1x p-2"></i>Tambah Data HUKDIS
+                        </button>
+                      </a>
+
+                    </div>
                   </div>
 
                 </div>
               </div>
               <!-- Light table -->
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
+              <div class="table-responsive py-4">
+
+                <table class="table table-flush" id="datatable-basic">
                   <thead class="thead-light">
-                    <tr>
-                      <th>Author</th>
-                      <th>Created at</th>
-                      <th>Product</th>
+                    <tr class="text-center">
+                      <th>No</th>
+                      <th>NIP</th>
+                      <th>Nama</th>
+                      <th>Tgl Lapor</th>
+                      <th>No Surat</th>
+                      <th>kat. Hukuman</th>
+                      <th>File</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="table-user">
-                        <img src="<?= base_url('assets/img/theme/team-1.jpg') ?>" class="avatar rounded-circle mr-3">
-                        <b>John Michael</b>
-                      </td>
-                      <td>
-                        <span class="text-muted">10/09/2018</span>
-                      </td>
-                      <td>
-                        <a href="#!" class="font-weight-bold">Argon Dashboard PRO</a>
-                      </td>
-                      <td class="text-center justify-content-between">
-                        <a href="#!" class="table-action" data-toggle="tooltip" data-original-title="Download File">
-                          <i class="fa fa-download fa-2x text-success p-2"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    <?php
+                    $no = 1;
+                    foreach ($hukdis->result_array() as $i) :
+                      $nip = $i['nip'];
+                      $nama = $i['nama'];
+                      $tgl_lapor = $i['tanggal_pelaporan'];
+                      $no_surat = $i['no_surat'];
+                      $kategori_hukuman=$i['jenis_hukuman'];
+                      $file=$i['file'];
+                    ?>
+                      <tr class="text-center">
+
+                        <td><?php echo $no++ ?></td>
+                        <td class="table-user">
+                          <b><?php echo $nip; ?></b>
+                        </td>
+                        <td><?php echo $nama; ?></td>
+                        <td><?php echo date("d-m-Y",strtotime($tgl_lapor))?></td>
+                        <td><?php echo $no_surat; ?></td>
+                        <td><?php echo $kategori_hukuman; ?></td>
+                        <td><?php echo $file; ?></td>
+
+                        <td class="text-center justify-content-between">
+                         
+                            <a href="<?= base_url('admin/hukdis/download/').$file; ?>">
+                           <button type="button" class="table-action btn btn-sm btn-danger text-white">
+                              Download
+                            </button>
+                            </a>
+                        </td>
+
+                      </tr>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
+
+
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
 
 
   <?php $this->load->view('layouts/footer') ?>

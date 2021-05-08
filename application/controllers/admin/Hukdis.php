@@ -8,16 +8,26 @@ function __construct(){
             $url=base_url();
             redirect($url);
         };
+        $this->load->model('m_hukdis');
 	}
 
 	public function index()
 	{
-		$this->load->view('admin/hukdis/index');
+		$data['hukdis']=$this->m_hukdis->getHukdisAll();
+		$this->load->view('admin/hukdis/index',$data);
 	}
 	
     public function verif()
     {
         $this->load->view('admin/hukdis/verifHukdis');
+    }
+
+    public function download($file){
+        $this->load->helper('download');
+        $name = $this->uri->segment(4);
+        $data = file_get_contents('./assets/dokument/HUKdis/'.$name);
+        force_download($name, $data);
+        redirect('admin/hukdis');
     }
 
 }
