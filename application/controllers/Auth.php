@@ -9,6 +9,9 @@ class Auth extends CI_Controller {
   //           redirect($url);
   //       };
 		$this->load->model('m_login');
+        $this->load->model('m_user');
+        $this->load->model('m_region');
+        $this->load->library('upload');
 		// $this->load->library('session');
 	}
 
@@ -68,7 +71,8 @@ class Auth extends CI_Controller {
 
 	public function register()
 	{
-		$this->load->view('auth/register');
+        $data['wilayah']=$this->m_region->getRegion();
+		$this->load->view('auth/register',$data);
 	}
 	
 	public function forgotPassword()
@@ -81,4 +85,82 @@ class Auth extends CI_Controller {
             $url=base_url('auth');
             redirect($url);
         }
+
+    function change_password(){
+        $this->load->view('auth/passwords/change');
+    }
+    function update_password(){
+        $nip=$this->input->post('nip');
+        $nama=$this->input->post('nama');
+
+        $pass=$this->input->post('password');
+        $ulangi_pass=$this->input->post('ulangi_password');
+// var_dump($nip);
+// die();
+        if ($pass != $ulangi_pass) {
+            echo $this->session->set_flashdata('msg','Password Tidak Sama');
+            redirect('auth/change_password');
+        }else{
+            $data=array(
+                'password'=>md5($pass)
+
+            );
+            // var_dump($data);
+            // die();
+            $this->m_user->update_password('tbl_user', $data, $nip);
+            echo $this->session->set_flashdata('msg','Ganti Password Berhasil');
+
+            redirect ('user/dashboard');
+        }
+    }
+
+
+    public function add_user(){
+                $config['upload_path'] = './assets/pas_foto/'; //path folder
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
+                $config['max_size']     = 3000; // 3MB
+                $this->upload->initialize($config);
+if(!empty($_FILES['file_foto']['name']))
+                {
+                    if ($this->upload->do_upload('file_foto'))
+                    {
+                            $gbr = $this->upload->data();
+                           
+                            $foto=$gbr['file_name'];
+                            $nip=$this->input->post('nip');
+                            $nama=$this->input->post('nama');
+                            $password=$this->input->post('password');
+                            $email=$this->input->post('email');
+                            $wilayah=$this->input->post('wilayah');
+                            $level=$this->input->post('level');
+                            $data = array(
+                                'user_nama' => $nama,
+                                'user_nip' => $nip,
+                                'password' => md5($password),
+                                'region_id'=>$wilayah,
+                                'email'     =>$email,
+                                'user_level'=>$level,
+                                'foto'      =>$foto
+                                );
+                            
+// var_dump($data);
+// die();
+                            $this->m_user->simpan_user('tbl_user', $data);
+                        echo $this->session->set_flashdata('msg','Akun Berhasil Dibuat');
+
+                            redirect('auth');
+                            
+                    }else{
+                        echo $this->session->set_flashdata('msg','GAGAL Upload FOTO');
+                        redirect('auth/register');
+                    }
+                     
+                }else{
+                    echo $this->session->set_flashdata('msg','GAGAL Upload File Terlalu Besar');
+            redirect('auth/register');
+                    
+                }
+                
+    }
 }

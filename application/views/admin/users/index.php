@@ -125,7 +125,7 @@
                                   </div>
 
                                    <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label float-left">Regon</label>
+                                    <label for="example-text-input" class="form-control-label float-left">Region</label>
                                     <select name="region" class="form-control">
                                        <option selected>--</option>
                                        <?php foreach ($data->result_array() as $i) {

@@ -59,13 +59,13 @@
                                 <h1 class="text-muted">Buat Akun Baru</h1>
 
                             </div>
-                            <form role="form">
+                            <form method="post" action="<?= base_url().'auth/add_user' ?>" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Masukkan nama" type="text">
+                                        <input class="form-control" name="nama" placeholder="Masukkan nama" type="text">
                                     </div>
                                 </div>
 
@@ -74,7 +74,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Masukkan nomor NIP" type="number">
+                                        <input class="form-control" name="nip" placeholder="Masukkan nomor NIP" type="number">
                                     </div>
                                 </div>
 
@@ -83,7 +83,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Masukkan email" type="email">
+                                        <input class="form-control" name="email" placeholder="Masukkan email" type="email">
                                     </div>
                                 </div>
 
@@ -92,39 +92,43 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" type="password">
+                                        <input class="form-control" name="password" placeholder="Password" type="password">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-control-label" for="region">Lokasi Wilayah</label>
-                                    <select class="form-control" id="region">
-                                        <option>1</option>
-                                        <option>2</option>
+                                    <label for="example-text-input" class="form-control-label float-left">Level</label>
+                                   <select name="level" class="form-control">
+                                       <option selected>--</option>
+                                      
+                                    <option value="1">KEJARI</option>
+                                    <option value="2">KEJATI</option>    
                                     </select>
-                                </div>
+                                  </div>
+
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label float-left">Lokasi Wilayah</label>
+                                    <select name="wilayah" class="form-control">
+                                       <option selected>--</option>
+                                       <?php foreach ($wilayah->result_array() as $i) {
+                                        $region_id=$i['region_id'];
+                                        $region_nama=$i['region_nama'];
+                                        ?>
+                                    <option value="<?php echo $region_id;?>"><?php echo $region_nama;?></option>
+                                         <?php }?>
+                                    </select>
+                                  </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="region">Upload Foto Profil</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFileLang" lang="en">
+                                        <input type="file" name="file_foto" class="custom-file-input" id="customFileLang" lang="en">
                                         <label class="custom-file-label" for="customFileLang">Select file</label>
                                     </div>
                                 </div>
                                 
-                                
-                                <!-- <div class="row my-4">
-                                    <div class="col-12">
-                                        <div class="custom-control custom-control-alternative custom-checkbox">
-                                            <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                                            <label class="custom-control-label" for="customCheckRegister">
-                                                <span class="text-muted">Saya setuju dengan <a href="#!">Privacy Policy</a></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary mt-4">Buat Akun</button>
+                                    <button type="submit" class="btn btn-primary mt-4">Buat Akun</button>
                                 </div>
                             </form>
                             <div class="form-group mt-4 mb-0 row">

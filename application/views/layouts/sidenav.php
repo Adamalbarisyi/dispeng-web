@@ -161,10 +161,10 @@
             <div class="collapse" id="hukdis">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a href="<?= base_url('user/hukdis/permintaan') ?>" class="nav-link">Permintaan HUKDIS</a>
+                  <a href="<?= base_url('user/user_hukdis/form') ?>" class="nav-link">Permintaan HUKDIS</a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('user/hukdis') ?>" class="nav-link">Data HUKDIS</a>
+                  <a href="<?= base_url('user/user_hukdis') ?>" class="nav-link">Data HUKDIS</a>
                 </li>
               </ul>
             </div>

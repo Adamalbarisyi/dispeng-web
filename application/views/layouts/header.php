@@ -68,7 +68,7 @@
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
 
-              <a href="<?php echo base_url().'auth/logout'?> "class="dropdown-item">
+              <a href="<?php echo base_url().'auth/change_password'?> "class="dropdown-item">
                 <i class="ni ni ni-settings-gear-65"></i>
                 <span>Ganti Password</span>
               </a>

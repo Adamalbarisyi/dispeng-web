@@ -25,10 +25,25 @@ class M_lhkpn extends CI_Model{
 		return $hsl;
 	}
 
-	public function download($id){
-  $query = $this->db->get_where('tbl_lhkpn',array('id_lhkpn'=>$id));
-  return $query->row_array();
- }
+	function getLhkpnVerif(){
+		$this->db->select('*');
+		$this->db->from('tbl_lhkpn');
+		$this->db->where('status_proses','1');
+		$this->db->join('tbl_employe', 'tbl_lhkpn.nip = tbl_employe.nip');
+		$this->db->join('tbl_user', 'tbl_lhkpn.verivikator = tbl_user.user_id');
+		$hsl=$this->db->get();
+		return $hsl;
+	}
+
+	function download($id){
+	  $query = $this->db->get_where('tbl_lhkpn',array('id_lhkpn'=>$id));
+	  return $query->row_array();
+	 }
+
+	 function update_lhkpn($table,$data, $id){
+	 	$this->db->where('id_lhkpn', $id);
+		$this->db->update($table, $data);
+	 }
 
 	
 }

@@ -17,6 +17,7 @@ function __construct(){
 	public function index()
 	{
 		$data['lhkpn']=$this->m_lhkpn->getLhkpnAll();
+		$data['detail_lhkpn']=$this->m_lhkpn->getLhkpnVerif();
 		$this->load->view('user/lhkpn/data_lhkpn',$data);
 	}
 	
@@ -55,7 +56,7 @@ if(!empty($_FILES['file_pdf']['name']))
 								$data = array(
 						        'nip' => $nip,
 						        'file' => $pdf,
-						        'status'=>0
+						        'status_proses'=>0
 								);
 							
 							
@@ -75,6 +76,14 @@ if(!empty($_FILES['file_pdf']['name']))
 				}
 				
 	}
+
+	public function download($file){
+        $this->load->helper('download');
+        $name = $this->uri->segment(4);
+        $data = file_get_contents('./assets/dokument/LHKPN/'.$name);
+        force_download($name, $data);
+        redirect('user/user_lhkpn');
+    }
 
 
 }

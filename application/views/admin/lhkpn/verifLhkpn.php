@@ -78,7 +78,7 @@
                         </button>
                         </a>
                      
-                       <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#exampleModal">
+                       <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#exampleModal<?php echo $id;?>">
                           Verifikasi
                         </button>
                         
@@ -96,7 +96,17 @@
       </div>
     </div>
   </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <?php 
+
+ foreach ($lhkpn->result_array() as $i):
+                        $id=$i['id_lhkpn'];
+                          $nip=$i['nip'];
+                          $nama=$i['nama'];
+                          $file=$i['file'];
+                          $status=$i['status_proses'];
+   ?>
+    <div class="modal fade" id="exampleModal<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -106,29 +116,34 @@
                                 </button>
                               </div>
                               <div class="modal-body">
-                                <form>
+                                <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/lhkpn/update_lhkpn'?>" enctype="multipart/form-data">
+                                  <input type="hidden" name="file" value="<?php echo $file;?>">
+                                  <input type="hidden" name="id_lhkpn" value="<?php echo $id;?>">
+                                  <input type="hidden" name="nip" value="<?php echo $nip;?>">
+
+
                                   <div class="form-group">
                                     <label for="example-text-input" class="form-control-label float-left">Masukkan Normor NIP</label>
-                                    <input class="form-control" type="text" placeholder="123245678" id="example-text-input">
+                                    <input class="form-control" type="text" name="nip" value="<?= $nip; ?>" id="example-text-input" disabled>
                                   </div>
 
                                <div class="form-group">
                                <h5 class="text-left">Upload File LHKPN</h5>
                                <div class="custom-file">
                                     
-                                    <input type="file" class="custom-file-input" id="customFileLang" lang="en">
-                                    <label class="custom-file-label" for="customFileLang">Pilih file</label>
+                                    <input type="file" name="new_file" class="custom-file-input" id="customFileLang" lang="en">
+                                    <label class="custom-file-label"  for="customFileLang">Pilih file</label>
                                   </div>
                                </div>
-                                </form>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                               </div>
                               </form>
                             </div>
                           </div>
                         </div>
+                      <?php endforeach; ?>
 
   <?php $this->load->view('layouts/footer') ?>

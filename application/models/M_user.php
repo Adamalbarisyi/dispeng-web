@@ -26,4 +26,9 @@ class M_user extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl->row();
 	}
+
+	function update_password($table, $data, $nip){
+		$this->db->where('user_nip', $nip);
+		$this->db->update($table, $data);
+	}
 }
