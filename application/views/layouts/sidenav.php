@@ -108,8 +108,7 @@
           </li>
           <!-- ===== Menu Pegawai (KEJATI) -->
           <?php elseif ($this->session->userdata('akses')==2): ?>
-          <h4 class="pl-4 pt-4"></h4>
-          <!-- Link User -->
+              <!-- Link User -->
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('user/dashboard') ?>">
               <i class="ni ni-shop  text-primary" aria-hidden="true"></i>
@@ -138,15 +137,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#lhkpn" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
               <i class="fa fa-file-text text-green"></i>
-              <span class="nav-link-text">LHKPN</span>
+              <span class="nav-link-text">LHKPN & HUKDIS</span>
             </a>
             <div class="collapse" id="lhkpn">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a href="<?= base_url('user/user_lhkpn/form') ?>" class="nav-link">Permintaan LHKPN</a>
+                  <a href="<?= base_url('user/user_lhkpn/form') ?>" class="nav-link">Permintaan LHKPN & HUKDIS</a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('user/user_lhkpn') ?>" class="nav-link">Data LHKPN</a>
+                  <a href="<?= base_url('user/user_lhkpn') ?>" class="nav-link">Data LHKPN & HUKDIS</a>
                 </li>
 
               </ul>
@@ -178,10 +177,10 @@
             <div class="collapse" id="skk">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a href="<?= base_url('user/skk/permintaan') ?>" class="nav-link">Permintaan SKK</a>
+                  <a href="<?= base_url('user/user_skk/form') ?>" class="nav-link">Permintaan SKK</a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('user/skk') ?>" class="nav-link">Data SKK</a>
+                  <a href="<?= base_url('user/user_skk') ?>" class="nav-link">Data SKK</a>
                 </li>
               </ul>
             </div>

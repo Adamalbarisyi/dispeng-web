@@ -1,12 +1,12 @@
-<div class="container-fluid fixed-bottom position-relative">
+<div class="container-fluid fixed-bottom">
   <div class="row justify-content-center">
     <div class="col-12">
       <!-- Footer -->
-      <footer class="footer pt-0">
+      <footer class="footer p-4 position-relative">
         <div class="row align-items-center justify-content-lg-center">
           <div class="col-lg-6">
             <div class="copyright text-center text-lg-left text-muted">
-              &copy; 2021 <a href="#" class="font-weight-bold ml-1" target="_blank">Dinas Pengawasan|KEJATI DIY</a>
+              &copy; 2021 <a href="#" class="font-weight-bold ml-1" target="_blank">Bidang Pengawasan|KEJATI DIY</a>
             </div>
           </div>
         </div>

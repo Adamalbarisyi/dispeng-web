@@ -57,7 +57,7 @@ class Employe extends CI_Controller {
 			);
 
 		$this->m_employe->simpan_employe('tbl_employe', $data);
-				redirect('user/employe/dataEmploye');
+				redirect('user/employe/data_employe');
 		
 	}
 }

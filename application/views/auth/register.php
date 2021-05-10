@@ -7,7 +7,7 @@
     <meta name="author" content="Creative Tim">
     <title>Bidang Pengawasan Kejaksaan Tinggi D.I Yogyakarta</title>
     <!-- Favicon -->
-    <link rel="icon" href="<?php echo base_url(); ?>assets/img/brand/favicon.png" type="image/png">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/img/logo/logo.png" type="image/png">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
@@ -58,8 +58,22 @@
                                 <img src="<?php echo base_url(); ?>assets/img/logo/logo.png" class="text-white h-15 w-75 mb-4">
                                 <h1 class="text-muted">Buat Akun Baru</h1>
 
+                                <?php if ($this->session->flashdata('warning')) {  ?>
+
+                                    <div class="alert alert-warning">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong>Peringatan </strong> <?php echo $this->session->flashdata('warning'); ?>
+                                    </div>
+
+                                <?php } else if ($this->session->flashdata('info')) {  ?>
+
+                                    <div class="alert alert-info">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong>Info!</strong> <?php echo $this->session->flashdata('info'); ?>
+                                    </div>
+                                <?php } ?>
                             </div>
-                            <form method="post" action="<?= base_url().'auth/add_user' ?>" enctype="multipart/form-data">
+                            <form method="post" action="<?= base_url() . 'auth/add_user' ?>" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative mb-3">
                                         <div class="input-group-prepend">
@@ -98,26 +112,26 @@
 
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label float-left">Level</label>
-                                   <select name="level" class="form-control">
-                                       <option selected>--</option>
-                                      
-                                    <option value="1">KEJARI</option>
-                                    <option value="2">KEJATI</option>    
+                                    <select name="level" class="form-control">
+                                        <option selected>--</option>
+
+                                        <option value="1">KEJARI</option>
+                                        <option value="2">KEJATI</option>
                                     </select>
-                                  </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label float-left">Lokasi Wilayah</label>
                                     <select name="wilayah" class="form-control">
-                                       <option selected>--</option>
-                                       <?php foreach ($wilayah->result_array() as $i) {
-                                        $region_id=$i['region_id'];
-                                        $region_nama=$i['region_nama'];
+                                        <option selected>--</option>
+                                        <?php foreach ($wilayah->result_array() as $i) {
+                                            $region_id = $i['region_id'];
+                                            $region_nama = $i['region_nama'];
                                         ?>
-                                    <option value="<?php echo $region_id;?>"><?php echo $region_nama;?></option>
-                                         <?php }?>
+                                            <option value="<?php echo $region_id; ?>"><?php echo $region_nama; ?></option>
+                                        <?php } ?>
                                     </select>
-                                  </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" for="region">Upload Foto Profil</label>
@@ -126,7 +140,7 @@
                                         <label class="custom-file-label" for="customFileLang">Select file</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary mt-4">Buat Akun</button>
                                 </div>

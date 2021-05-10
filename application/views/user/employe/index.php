@@ -35,7 +35,8 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-lg-6">
+            <div class="col-lg-3"></div>
+              <div class="col-lg-6 border p-4">
                 <h2 class="pt-4 pb-4">Data Diri</h2>
 
                 <form class="form-horizontal" method="post" action="<?php echo base_url().'user/employe/simpan_employe'?>" enctype="multipart/form-data">
@@ -115,14 +116,16 @@
                     </div>
                   </div>
 
-                  <!--  <div class="p-5">
+                   <div class="p-5">
                   <div class="text-center">
                     <button class="btn btn-primary" type="submit">Submit</button>
                   </div>
-                </div> -->
+                </div>
 
               </div>
-              <div class="col-lg-6">
+              
+              <div class="col-lg-3"></div>
+              <!-- <div class="col-lg-6">
                 <h2 class="pt-4 pb-4">Upload File LHKPN</h2>
                 <div class="form-group row">
                   <label for="status-lhkpn" class="col-md-4 col-form-label form-control-label">Status LHKPN
@@ -222,7 +225,7 @@
                     <button class="btn btn-primary" type="button">Submit</button>
                   </div>
                 </div>
-              </div>
+              </div> -->
               </form>
             </div>
           </div>

@@ -8,12 +8,19 @@ class Dashboard extends CI_Controller {
             $url=base_url();
             redirect($url);
         };
+		$this->load->model('m_employe');
+		$this->load->model('m_lhkpn');
+		$this->load->model('m_hukdis');
+		$this->load->library('upload');
 	}
 
 
 	public function index()
 	{
-		$this->load->view('admin/dashboard/index');
+		$data['hukdis']=$this->m_hukdis->getHukdisAll();
+		$data['lhkpn']=$this->m_lhkpn->getLhkpnAll();
+		$data['detail_lhkpn']=$this->m_lhkpn->getLhkpnVerif();
+		$this->load->view('admin/dashboard/index',$data);
 	}
 	
 

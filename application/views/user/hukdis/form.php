@@ -62,8 +62,8 @@
                        ?>
                       <div class="col-lg-4">
                         <div class="custom-control custom-checkbox mt-2">
-                          <input class="custom-control-input" value="<?= $id; ?>" id="jenis_hukuman" type="radio" name="kategori">
-                          <label class="custom-control-label"  for="jenis_hukuman"><?= $jenis_hukuman ?></label>
+                          <input  value="<?= $id; ?>" id="jenis_hukuman" type="checkbox" name="kategori">
+                          <label ><?= $jenis_hukuman ?></label>
                         </div>
                       </div>
                     <?php endforeach; ?>

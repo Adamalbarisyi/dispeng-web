@@ -55,17 +55,24 @@
                       <th>NIP</th>
                       <th>Nama</th>
                       <th>Region</th>
-                      <th>Action</th>
                       <th>Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
                       foreach ($employe->result_array() as $i):
+                      $id=$i['id'];
                           $nip=$i['nip'];
                           $nama=$i['nama'];
                           $region=$i['region_nama'];
+                          $nrp=$i['nrp'];
+                          $pangkat_gol=$i['pangkat_gol'];
+                          $jabatan=$i['jabatan'];
+                          $status=$i['status'];
+                          $keterangan=$i['keterangan'];
+                          $email=$i['email'];
                         ?>
                     <tr class="text-center">
                       <td><?php echo $no++?></td>
@@ -75,15 +82,16 @@
                       <td><?php echo $nama; ?></td>
                       <td><?php echo $region; ?></td>
                       <td>
-                      
-                    <span class="badge-md badge-pill badge-success">Terverifikasi</span>
+                      <?php if($status==0):?>         Aktif <?php else :?> <?= $keterangan?>
+                                        <?php endif;?>
+                 
                       </td>
                       <td class="text-center justify-content-between">
-                        <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail">
+                        <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail<?php echo $id; ?>">
                           Detail 
                         </button>
                         
-                        <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modal-detail<?php echo $id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -97,35 +105,35 @@
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nama Lengkap</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="John Snow" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $nama; ?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
                                     
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="12345678" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
                                     
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NRP</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="123456789" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $nrp;?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
                                     
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Pangkat Golongan</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="Pranata Muda" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $pangkat_gol;?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
                                     
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Jabatan</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="Manager" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $jabatan;?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
                                     
@@ -139,23 +147,18 @@
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Pegawai</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="Aktif" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php if($status==0):?> Aktif <?php else :?> <?= $keterangan?>
+                                        <?php endif;?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
                                     
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Email</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="Jhonprew@gmail.com" id="example-text-input" disabled>
+                                        <input class="form-control" type="text" value="<?php echo $email;?>" id="example-text-input" disabled>
                                       </div>
                                     </div>
-                                    
-                                    <div class="form-group row mb-2">
-                                      <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status LHKPN</label>
-                                      <div class="col-md-8">
-                                        <input class="form-control" type="text" value="Ada" id="example-text-input" disabled>
-                                      </div>
-                                    </div>
+                         
                                     
                                     
                                   </div>

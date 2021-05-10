@@ -25,7 +25,7 @@ function __construct(){
     public function download($file){
         $this->load->helper('download');
         $name = $this->uri->segment(4);
-        $data = file_get_contents('./assets/dokument/HUKdis/'.$name);
+        $data = file_get_contents('./assets/dokument/HUKDIS/'.$name);
         force_download($name, $data);
         redirect('admin/hukdis');
     }

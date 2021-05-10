@@ -37,57 +37,72 @@
             <div class="row">
               <div class="col-lg-3"></div>
               <div class="col-lg-6 p-4 border">
-                 <?php
-              $iduser=$this->session->userdata('iduser');
-              $q=$this->db->query("SELECT * FROM tbl_user WHERE user_id='$iduser'");
-              $c=$q->row_array();
+                <?php
+                $iduser = $this->session->userdata('iduser');
+                $q = $this->db->query("SELECT * FROM tbl_user WHERE user_id='$iduser'");
+                $c = $q->row_array();
 
-                  ?>
+                ?>
 
-              <form method="post" action="<?= base_url().'auth/update_password' ?>">
-                 <input name="nip" value="<?= $c['user_nip']; ?>" type="hidden">
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                        </div>
-                                        <input class="form-control" name="nama" value="<?= $c['user_nama'] ?>" type="text" >
-                                    </div>
-                                </div>
+                <form method="post" action="<?= base_url() . 'auth/update_password' ?>">
+                  <input name="nip" value="<?= $c['user_nip']; ?>" type="hidden">
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      </div>
+                      <input class="form-control" name="nama" value="<?= $c['user_nama'] ?>" type="text">
+                    </div>
+                  </div>
 
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
-                                        </div>
-                                        <input class="form-control" name="nip" value="<?= $c['user_nip']; ?>" type="text" disabled>
-                                    </div>
-                                </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                      </div>
+                      <input class="form-control" name="nip" value="<?= $c['user_nip']; ?>" type="text" disabled>
+                    </div>
+                  </div>
 
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
-                                        <input class="form-control" name="password" placeholder="Masukan Password Baru" type="password" required>
-                                    </div>
-                                </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input class="form-control" name="password" placeholder="Masukan Password Baru" type="password" required>
+                    </div>
+                  </div>
 
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
-                                        <input class="form-control" name="ulangi_password" placeholder="Ulangi Password" type="password" required>
-                                    </div>
-                                     <p class="text-danger mt-4"><?php echo $this->session->flashdata('msg');?></p>
-                                </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input class="form-control" name="ulangi_password" placeholder="Ulangi Password" type="password" required>
+                    </div>
+                    <p class="text-danger mt-4"><?php echo $this->session->flashdata('success'); ?></p>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mt-4">Simpan</button>
-                                </div>
-                            </form>
-                    
+                    <?php if ($this->session->flashdata('warning')) {  ?>
+
+                      <div class="alert alert-warning">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Peringatan </strong> <?php echo $this->session->flashdata('warning'); ?>
+                      </div>
+
+                    <?php } else if ($this->session->flashdata('success')) {  ?>
+
+                      <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Berhasil</strong> <?php echo $this->session->flashdata('success'); ?>
+                      </div>
+                    <?php } ?>
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-4">Simpan</button>
+                  </div>
+                </form>
+
               </div>
               <div class="col-lg-3"></div>
             </div>
@@ -101,4 +116,3 @@
 
 
   <?php $this->load->view('layouts/footer') ?>
-
