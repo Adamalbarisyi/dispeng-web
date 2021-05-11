@@ -33,7 +33,7 @@
                   <div>
                     <p class="text-danger mt-4"><?php echo $this->session->flashdata('msg'); ?></p>
                   </div>
-                  <div class="col-6">
+                 <!--  <div class="col-6">
                     <div class="float-right">
                       <a href="<?= base_url() . 'user/user_lhkpn/form' ?>">
                         <button type="button" class="table-action btn btn-sm btn-warning text-white">
@@ -42,7 +42,7 @@
                       </a>
 
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>

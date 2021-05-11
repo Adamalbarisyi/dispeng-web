@@ -162,14 +162,14 @@
                               <?php endif; ?>
                               <td>
                                 <?php if ($status == 1) : ?>
-                                  <a href="#">
+                                  <!-- <a href="#">
                                   <button type="button" class="table-action btn btn-sm btn-info text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-skk<?php echo $id; ?>">
                                     Preview
                                   </button>
                                     <button type="button" class="table-action btn btn-sm btn-danger text-white">
                                       Download
                                     </button>
-                                  </a>
+                                  </a> -->
                                   <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-lhkpn<?php echo $id; ?>">
                                     Detail
                                   </button>
@@ -255,7 +255,8 @@
                         <tbody>
                           <?php
                           $no = 1;
-                          foreach ($lhkpn->result_array() as $i) :
+                          foreach ($skk->result_array() as $i) :
+                            $id=$i['id_skk'];
                             $nip = $i['nip'];
                             $nama = $i['nama'];
                             $file = $i['file'];
@@ -289,7 +290,7 @@
                                     Detail
                                   </button>
                                 <?php else : ?>
-                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-skk-proses<?php echo $id; ?>">
+                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail_proses<?= $id;?>">
                                     Detail
                                   </button>
                                 <?php endif; ?>
@@ -515,4 +516,60 @@
         </div>
       </div>
     </div>
+
+
+    <!-- MODAL DETAIL SKK PROSES -->
+    <?php
+  foreach ($skk->result_array() as $i) :
+    $id = $i['id_skk'];
+    $nip = $i['nip'];
+    $nama = $i['nama'];
+    $file = $i['file'];
+    $status = $i['status_proses'];
+    $tgl_pengajuan = $i['created_at'];
+    $tgl_verif = $i['updated_at'];
+  ?>
+    <div class="modal fade" id="modal-detail_proses<?= $id;  ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detail LHKPN</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+
+          <div class="modal-body">
+            <div class="form-group row mb-2">
+              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+              </div>
+            </div>
+
+            <div class="form-group row mb-2">
+              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+              </div>
+            </div>
+
+            <div class="form-group row mb-2">
+              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
+              </div>
+            </div>
+
+
+            <h4></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endforeach; ?>
   <?php $this->load->view('layouts/footer') ?>

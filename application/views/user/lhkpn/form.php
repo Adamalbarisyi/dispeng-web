@@ -47,41 +47,47 @@
                     <label for="tanggal-pengajuan" class="col-md-4 col-form-label form-control-label">Tanggal Pengajuan
                       <span class="font-weight-bold float-right">:</span></label>
                     <div class="col-md-8">
-                      <input class="form-control" type="date" value="2018-11-23" id="tanggal-pengajuan" required>
+                      <input class="form-control" type="date" placeholder="2018-11-23" id="tanggal-pengajuan" name="tanggal_lapor_lhkpn" required>
                     </div>
                   </div>
 
                   <div class="form-group row">
-                  <label for="status-lhkpn" class="col-md-4 col-form-label form-control-label">Status LHKPN
+                    <label for="nomor-hukdis" class="col-md-4 col-form-label form-control-label">Upload File LHKPN
+                      <span class="font-weight-bold float-right">:</span></label>
+                    <div class="col-md-8">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="file_pdf_lhkpn" id="customFileLang" lang="en">
+                        <label class="custom-file-label" for="customFileLang">Pilih file</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                  <label for="status-lhkpn" class="col-md-4 col-form-label form-control-label">Status HUKDIS
                     <span class="font-weight-bold float-right">:</span></label>
                   <div class="col-md-8">
                     <div class="col-lg-12 p-0">
                       <div class="custom-control custom-checkbox mt-2">
-                        <input class="custom-control-input" id="tidak-wajib" type="checkbox">
-                        <label class="custom-control-label" for="tidak-wajib">Tidak Wajib</label>
+                        <input class="custom-control-input" value="0" id="tidak-wajib" type="checkbox" name="status-hukdis">
+                        <label class="custom-control-label" for="tidak-wajib">TIDAK ADA</label>
                       </div>
                     </div>
                     <div class="col-lg-12 p-0">
                       <div class="custom-control custom-checkbox mt-2">
-                        <input class="custom-control-input" id="wajib" type="checkbox" name="status-lhkpn">
-                        <label class="custom-control-label" for="wajib">Wajib</label>
-                      </div>
-
-                      <div class="custom-file m-2" id='select-lhkpn'>
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="en">
-                        <label class="custom-file-label" for="customFileLang"></label>
+                        <input class="custom-control-input" value="1" id="wajib" type="checkbox" name="status-hukdis">
+                        <label class="custom-control-label" for="wajib">ADA</label>
                       </div>
                     </div>
                   </div>
                 </div>
 
-
-                  <h2 class="pt-2 pb-2">Upload File HUKDIS</h2>
+              <div id='select-hukdis'>
+                         <h2 class="pt-2 pb-2">Upload File HUKDIS</h2>
                   <div class="form-group row">
                     <label for="tanggal-pengajuan" class="col-md-4 col-form-label form-control-label">Tanggal Pengajuan
                       <span class="font-weight-bold float-right">:</span></label>
                     <div class="col-md-8">
-                      <input class="form-control" type="date" value="2018-11-23" id="tanggal-pengajuan" required>
+                      <input class="form-control" type="date" placeholder ="2018-11-23" id="tanggal-pengajuan" name="tanggal_lapor_hukdis" required>
                     </div>
                   </div>
 
@@ -89,47 +95,44 @@
                     <label for="nomor-hukdis" class="col-md-4 col-form-label form-control-label">Nomor Surat
                       <span class="font-weight-bold float-right">:</span></label>
                     <div class="col-md-8">
-                      <input class="form-control" type="digits" value="09736484" id="nomor-hukdis" required>
+                      <input class="form-control" type="digits" placeholder ="09736484" id="nomor-hukdis" name="no_surat_hukdis" required>
                     </div>
                   </div>
-
                   <div class="form-group row">
-                    <label class="col-md-4 col-form-label form-control-label">Jenis Hukuman
-                      <span class="font-weight-bold float-right">:</span></label>
-                    <div class="col-md-8">
-                      <div class="row">
-                        <div class="col-lg-4">
-                          <div class="custom-control custom-checkbox mt-2">
-                            <input class="custom-control-input" id="ringan" type="checkbox" name="ringan">
-                            <label class="custom-control-label" for="ringan">Ringan</label>
-                          </div>
-                        </div>
-                        <div class="col-lg-4">
-                          <div class="custom-control custom-checkbox mt-2">
-                            <input class="custom-control-input" id="sedang" type="checkbox" name="sedang">
-                            <label class="custom-control-label" for="sedang">Sedang</label>
-                          </div>
-                        </div>
-                        <div class="col-lg-4">
-                          <div class="custom-control custom-checkbox mt-2">
-                            <input class="custom-control-input" id="berat" type="checkbox" name="berat">
-                            <label class="custom-control-label" for="berat">Berat</label>
-                          </div>
+                  <label class="col-md-4 col-form-label form-control-label">Jenis Hukuman
+                    <span class="font-weight-bold float-right">:</span></label>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <?php foreach ($kategori->result_array() as $i): 
+                        $id=$i['id_kategori'];
+                        $jenis_hukuman=$i['jenis_hukuman'];
+                       ?>
+                      <div class="col-lg-4">
+
+                        <div class="custom-control mt-2">
+                          <label> 
+                            <input value="<?= $id; ?>" id="jenis_hukuman" type="radio" name="kategori"> <?= $jenis_hukuman ?>
+                          </label>
+                         
+                          <!-- <label class="custom-control-label"  for="jenis_hukuman"><?= $jenis_hukuman ?></label> -->
                         </div>
                       </div>
+                    <?php endforeach; ?>
                     </div>
                   </div>
-
-                  <div class="form-group row">
+                </div>
+                           <div class="form-group row">
                     <label for="nomor-hukdis" class="col-md-4 col-form-label form-control-label">Upload File Hukdis
                       <span class="font-weight-bold float-right">:</span></label>
                     <div class="col-md-8">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="file_pdf" id="customFileLang" lang="en">
+                        <input type="file" class="custom-file-input" name="file_pdf_hukdis" id="customFileLang" lang="en">
                         <label class="custom-file-label" for="customFileLang">Pilih file</label>
                       </div>
                     </div>
                   </div>
+                      </div>
+                 
 
 
                   <div class="p-4">

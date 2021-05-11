@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <!-- Nav items -->
         <ul class="navbar-nav">
-          <?php if ($this->session->userdata('akses')==1): ?>
+          <?php if ($this->session->userdata('akses')==0): ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/dashboard') ?>">
               <i class="ni ni-shop text-primary"></i>
@@ -30,12 +30,12 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/user') ?>">
               <i class="fa fa-user text-warning" aria-hidden="true"></i>
               <span class="nav-link-text">Pengguna</span>
             </a>
-          </li>
+          </li> -->
 
            <li class="nav-item">
             <a class="nav-link" href="#pegawai" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
@@ -73,7 +73,7 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#hukdis" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
               <i class="fa fa-file-text text-orange"></i>
               <span class="nav-link-text">HUKDIS</span>
@@ -88,6 +88,13 @@
                 </li>
               </ul>
             </div>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('admin/hukdis') ?>">
+              <i class="fa fa-file-text text-orange"></i>
+              <span class="nav-link-text">Data HUKDIS</span>
+            </a>
           </li>
 
           <li class="nav-item">
@@ -106,8 +113,8 @@
               </ul>
             </div>
           </li>
-          <!-- ===== Menu Pegawai (KEJATI) -->
-          <?php elseif ($this->session->userdata('akses')==2): ?>
+          <!-- ===== Menu USER -->
+          <?php elseif ($this->session->userdata('akses')==1): ?>
               <!-- Link User -->
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('user/dashboard') ?>">
@@ -152,7 +159,7 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#hukdis" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
               <i class="fa fa-file-text text-orange"></i>
               <span class="nav-link-text">HUKDIS</span>
@@ -167,7 +174,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a class="nav-link" href="#skk" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">

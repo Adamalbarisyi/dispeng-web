@@ -1,9 +1,7 @@
 $("table.display").DataTable();
-$("#tidak-aktif")
-	.on("change", function () {
+$('[id="tidak-aktif"]').on('change', function() {
 		$("#select-status").toggle(this.checked);
-	})
-	.change();
+	}).change();
 
 $('input[name="status"]').on("click", function (e) {
 	$('input[name="status"]').prop("checked", false);
@@ -19,8 +17,8 @@ $('input[name="status"]').on("click", function (e) {
 // 	});
 // });
 
-$('[name="status-lhkpn"]').on('change', function() {
-	$('#select-lhkpn').toggle(this.checked);
+$('[id="wajib"]').on('change', function() {
+	$('#select-hukdis').toggle(this.checked);
   }).change();
 
   $('[name="status-skk"]').on('change', function() {

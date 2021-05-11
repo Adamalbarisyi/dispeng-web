@@ -161,17 +161,16 @@
                                 <td> <span class="badge-md badge-pill badge-success">Terverifikasi</span></td>
                               <?php endif; ?>
                               <td>
-                                <?php if ($status == 1) : ?>
-                                  <a href="#">
-                                  <button type="button" class="table-action btn btn-sm btn-info text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-skk<?php echo $id; ?>">
-                                    Preview
-                                  </button>
-                                    <button type="button" class="table-action btn btn-sm btn-danger text-white">
+                                <?php if ($status == 0) : ?>
+                                   <a href="<?= base_url('admin/lhkpn/preview/').$id;?>" target="_blank" class="table-action btn btn-sm btn-primary text-white" >Previwe</a>
+                              
+                                    <a href="<?= base_url('admin/lhkpn/download/').$file; ?>">
+                                       <button type="button" class="table-action btn btn-sm btn-danger text-white">
                                       Download
-                                    </button>
-                                  </a>
-                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-lhkpn<?php echo $id; ?>">
-                                    Detail
+                                      </button>
+                                    </a>
+                                   <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#lhkpnModal<?php echo $id;?>">
+                                    Verifikasi
                                   </button>
                                 <?php else : ?>
                                   <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-lhkpn-proses<?php echo $id; ?>">
@@ -205,6 +204,7 @@
                           <?php
                           $no = 1;
                           foreach ($hukdis->result_array() as $i) :
+                            $id=$i['id_hukdis'];
                             $nip = $i['nip'];
                             $nama = $i['nama'];
                             $tgl_lapor = $i['tanggal_pelaporan'];
@@ -229,6 +229,8 @@
                                     Download
                                   </button>
                                 </a>
+                                <a href="#preview_lhkpnModal<?php echo $id;?>" class="table-action btn btn-sm btn-primary text-white"data-toggle="modal" >Previwe</a>
+                                 
                               </td>
 
                             </tr>
@@ -255,7 +257,8 @@
                         <tbody>
                           <?php
                           $no = 1;
-                          foreach ($lhkpn->result_array() as $i) :
+                          foreach ($skk->result_array() as $i) :
+                            $id=$i['id_skk'];
                             $nip = $i['nip'];
                             $nama = $i['nama'];
                             $file = $i['file'];
@@ -276,17 +279,15 @@
                               <?php endif; ?>
 
                               <td class="text-center justify-content-between">
-                                <?php if ($status == 1) : ?>
-                                  <button type="button" class="table-action btn btn-sm btn-info text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-skk<?php echo $id; ?>">
-                                    Preview
-                                  </button>
-                                  <a href="#">
-                                    <button type="button" class="table-action btn btn-sm btn-danger text-white">
-                                      Download
+                                <?php if ($status == 0) : ?>
+                                   <a href="<?= base_url('admin/skk/preview/').$id;?>" target="_blank" class="table-action btn btn-sm btn-primary text-white" >Previwe</a>
+                                  <a href="<?= base_url('admin/skk/download/').$file; ?>">
+                                     <button type="button" class="table-action btn btn-sm btn-danger text-white">
+                                    Download
                                     </button>
                                   </a>
-                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-skk<?php echo $id; ?>">
-                                    Detail
+                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#skkModal<?php echo $id;?>">
+                                      Verifikasi
                                   </button>
                                 <?php else : ?>
                                   <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail-skk-proses<?php echo $id; ?>">
@@ -309,210 +310,133 @@
     </div>
   </div>
 
-  <!-- Modal Detail LHKPN -->
-  <?php
-  foreach ($detail_lhkpn->result_array() as $i) :
-    $id = $i['id_lhkpn'];
-    $nip = $i['nip'];
-    $nama = $i['nama'];
-    $file = $i['file'];
-    $status = $i['status_proses'];
-    $tgl_pengajuan = $i['created_at'];
-    $tgl_verif = $i['updated_at'];
-    $verifikator = $i['user_nama'];
-  ?>
-    <!-- Modal Detail -->
-    <div class="modal fade" id="modal-detail-lhkpn<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail LHKPN</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
 
-          <div class="modal-body">
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="NOMOR NIP" id="example-text-input" disabled>
-              </div>
-            </div>
+  <!-- MODAL VERIFIASI LHKPN -->
+  <?php 
+  foreach ($lhkpn->result_array() as $i):
+                        $id=$i['id_lhkpn'];
+                          $nip=$i['nip'];
+                          $nama=$i['nama'];
+                          $file=$i['file'];
+                          $status=$i['status_proses'];
+   ?>
+    <div class="modal fade" id="lhkpnModal<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Verifikasi File LHKPN</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/lhkpn/update_lhkpn'?>" enctype="multipart/form-data">
+                                  <input type="hidden" name="file" value="<?php echo $file;?>">
+                                  <input type="hidden" name="id_lhkpn" value="<?php echo $id;?>">
+                                  <input type="hidden" name="nip" value="<?php echo $nip;?>">
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="Tanggal Pengajuan" id="example-text-input" disabled>
-              </div>
-            </div>
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="tanggal verifikasi" id="example-text-input" disabled>
-              </div>
-            </div>
+                                  <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label float-left">Masukkan Normor NIP</label>
+                                    <input class="form-control" type="text" name="nip" value="<?= $nip; ?>" id="example-text-input" disabled>
+                                  </div>
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="verifikator" id="example-text-input" disabled>
-              </div>
-            </div>
+                               <div class="form-group">
+                               <h5 class="text-left">Upload File LHKPN</h5>
+                               <div class="custom-file">
+                                    
+                                    <input type="file" name="new_file" class="custom-file-input" id="customFileLang" lang="en">
+                                    <label class="custom-file-label"  for="customFileLang">Pilih file</label>
+                                  </div>
+                               </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endforeach; ?>
 
-            <h4></h4>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php endforeach; ?>
+  <!-- MODAL VERFIKIASI SKK -->
 
-  <!-- Modal detail proses LHKPN-->
-  <?php
-  foreach ($lhkpn->result_array() as $i) :
-    $id = $i['id_lhkpn'];
-    $nip = $i['nip'];
-    $nama = $i['nama'];
-    $file = $i['file'];
-    $status = $i['status_proses'];
-    $tgl_pengajuan = $i['created_at'];
-    $tgl_verif = $i['updated_at'];
-  ?>
-    <!-- Modal detail proses -->
-    <div class="modal fade" id="modal-detail-lhkpn-proses<?= $id;  ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail LHKPN</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          
-          <div class="modal-body">
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
-              </div>
-            </div>
+ <?php 
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
-              </div>
-            </div>
+ foreach ($skk->result_array() as $i):
+                        $id=$i['id_skk'];
+                          $nip=$i['nip'];
+                          $nama=$i['nama'];
+                          $file=$i['file'];
+                          $status=$i['status_proses'];
+   ?>
+    <div class="modal fade" id="skkModal<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Verifikasi File</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/skk/update_skk'?>" enctype="multipart/form-data">
+                                  <input type="hidden" name="file" value="<?php echo $file;?>">
+                                  <input type="hidden" name="id_skk" value="<?php echo $id;?>">
+                                  <input type="hidden" name="nip" value="<?php echo $nip;?>">
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php endforeach; ?>
-  
-    <!-- Modal Detail SKK -->
 
-    <!-- Modal Detail -->
-    <div class="modal fade" id="modal-detail-skk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail SKK</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+                                  <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label float-left">Masukkan Normor NIP</label>
+                                    <input class="form-control" type="text" name="nip" value="<?= $nip; ?>" id="example-text-input" disabled>
+                                  </div>
 
-          <div class="modal-body">
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="NOMOR NIP" id="example-text-input" disabled>
-              </div>
-            </div>
+                               <div class="form-group">
+                               <h5 class="text-left">Upload File Persetujuan SKK</h5>
+                               <div class="custom-file">
+                                    
+                                    <input type="file" name="new_file" class="custom-file-input" id="customFileLang" lang="en">
+                                    <label class="custom-file-label"  for="customFileLang">Pilih file</label>
+                                  </div>
+                               </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endforeach; ?>
+ 
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="Tanggal Pengajuan" id="example-text-input" disabled>
-              </div>
-            </div>
-
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="tanggal verifikasi" id="example-text-input" disabled>
-              </div>
-            </div>
-
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="verifikator" id="example-text-input" disabled>
-              </div>
-            </div>
-
-            <h4></h4>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <!-- Modal detail proses SKK-->
-
-    <!-- Modal detail proses -->
-    <div class="modal fade" id="modal-detail-skk-proses" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail SKK</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          
-          <div class="modal-body">
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
-              </div>
-            </div>
-
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
-              </div>
-            </div>
-
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php 
+ foreach ($hukdis->result_array() as $i) :
+                            $id=$i['id_hukdis'];
+                            $nip = $i['nip'];
+                            $nama = $i['nama'];
+                            $tgl_lapor = $i['tanggal_pelaporan'];
+                            $no_surat = $i['no_surat'];
+                            $kategori_hukuman = $i['jenis_hukuman'];
+                            $file = $i['file'];
+   ?>
+    <div class="modal fade" id="preview_lhkpnModal<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Verifikasi File LHKPN</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                               <object type="application/pdf" data="<?= base_url('./assets/dokument/HUKDIS/').$file ?>" width=100%>
+                                 <embed src="<?= base_url('./assets/dokument/LHKPN/').$file ?>" type="application/pdf"></embed>
+                               </object>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endforeach; ?>
   <?php $this->load->view('layouts/footer') ?>

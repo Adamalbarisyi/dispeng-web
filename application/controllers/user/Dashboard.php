@@ -11,6 +11,8 @@ function __construct(){
 		$this->load->model('m_employe');
 		$this->load->model('m_lhkpn');
 		$this->load->model('m_hukdis');
+		$this->load->model('m_skk');
+
 		$this->load->library('upload');
 		
 	}
@@ -19,6 +21,8 @@ function __construct(){
 		$data['hukdis']=$this->m_hukdis->getHukdisAll();
 		$data['lhkpn']=$this->m_lhkpn->getLhkpnAll();
 		$data['detail_lhkpn']=$this->m_lhkpn->getLhkpnVerif();
+		$data['skk']=$this->m_skk->getSkkProses();
+
 		$this->load->view('user/dashboard/index',$data);
 	}
 	

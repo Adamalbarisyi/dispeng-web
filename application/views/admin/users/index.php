@@ -120,7 +120,8 @@
                                        <option selected>--</option>
                                       
                                     <option value="1">KEJARI</option>
-                                    <option value="2">KEJATI</option>    
+                                    <option value="2">KEJATI</option>
+                                    <option value="3">ADMIN</option>     
                                     </select>
                                   </div>
 

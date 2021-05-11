@@ -10,15 +10,16 @@ function __construct(){
             redirect($url);
         };
 		$this->load->model('m_employe');
-		$this->load->model('m_lhkpn');
+		$this->load->model('m_skk');
 		$this->load->library('upload');
 
 	}
 	public function index()
 	{
-		// $data['lhkpn']=$this->m_lhkpn->getLhkpnAll();
+		$data['skk']=$this->m_skk->getSkkAll();
+		$data['detail_skk']=$this->m_skk->getSkkVerif();
 		// $data['detail_lhkpn']=$this->m_lhkpn->getLhkpnVerif();
-		$this->load->view('user/skk/index');
+		$this->load->view('user/skk/data_skk',$data);
 	}
 	
     public function form()
@@ -41,27 +42,30 @@ function __construct(){
 
    public function simpan_form(){
 				$nip=$this->input->post('nip');
-				$name=$nip.'-Surat_LHKPN'.'-'.date('dmY');
-				$config['upload_path'] = './assets/dokument/LHKPN'; //path folder
+				$tanggal_lapor=$this->input->post('tanggal_surat_skk');
+				$name=$nip.'-Surat_Permintaan_SKK'.'-'.date('dmY');
+				$config['upload_path'] = './assets/dokument/SKK'; //path folder
 	            $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa anda sesuaikan
 	            $config['max_size']     = 2000; // 3MB
 	            $config['file_name']=$name;
 	            $this->upload->initialize($config);
-if(!empty($_FILES['file_pdf']['name']))
+if(!empty($_FILES['file_pdf_skk']['name']))
 	            {
-	                if ($this->upload->do_upload('file_pdf'))
+	                if ($this->upload->do_upload('file_pdf_skk'))
 	                {
 	                        $file = $this->upload->data();
 	                       		$pdf=$file['file_name'];
 								$data = array(
 						        'nip' => $nip,
 						        'file' => $pdf,
-						        'status_proses'=>0
+						        'status_proses'=>0,
+						        'tanggal_pengajuan'=>$tanggal_lapor
 								);
 							
-							
-							$this->m_lhkpn->simpan_lhkpn('tbl_lhkpn', $data);
-							redirect('user/user_lhkpn');
+							// var_dump($data);
+							// die();
+							$this->m_skk->simpan_skk('tbl_skk', $data);
+							redirect('user/user_skk');
 	                       	
 					}else{
 	                    // echo '<script>alert("");</script>';

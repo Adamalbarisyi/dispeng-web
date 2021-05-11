@@ -11,6 +11,10 @@ class M_user extends CI_Model{
 		$this->db->insert($table, $data);
 	}
 
+	function simpan_user_tanpaImg($table, $data){
+		$this->db->insert($table, $data);
+	}
+
 	function getUserAll(){
 		$this->db->select('*');
 		$this->db->from('tbl_user');

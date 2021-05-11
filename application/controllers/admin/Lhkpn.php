@@ -15,11 +15,13 @@ function __construct(){
     public function index()
     {
         $data['lhkpn']=$this->m_lhkpn->getLhkpnVerif();
-    
-        // var_dump($data);
-        // echo "</pre>";
-        // die();
         $this->load->view('admin/lhkpn/index',$data);
+    }
+    function preview($id){
+       $data['id']=$this->m_lhkpn->ambilId($id);
+// var_dump($data);
+// die();
+        $this->load->view('admin/lhkpn/preview',$data);
     }
     
     public function verif()
@@ -79,6 +81,21 @@ if(!empty($_FILES['new_file']['name']))
                         // redirect('user/user_lhkpn1');
                 }
                 
+    }
+
+    function priview($file){
+    $data=$file;
+    // var_dump($data);
+    // die();
+    $path='./assets/dokument/LHKPN/'.$data;
+
+    header('Content-Type: aplication/pdf');
+    // header('Content-Disposition: inline;filename'.$path);
+    // header('Content-Transfer-Enconding: binary');
+    // header('Accept-Ranges: bytes');
+
+    readfile($path);    
+
     }
 
 }

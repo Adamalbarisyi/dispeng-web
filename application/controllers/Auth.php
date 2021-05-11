@@ -41,25 +41,25 @@ class Auth extends CI_Controller
 
             if ($this->session->userdata('masuk') == true) {
 
-                if ($cek_akses['user_level'] == '1') {
-                    $this->session->set_userdata('akses', '1');
+                if ($cek_akses['user_level'] == '0') {
+                    $this->session->set_userdata('akses', '0');
                     $iduser = $cek_akses['user_id'];
                     $user_nama = $cek_akses['user_nama'];
                     $this->session->set_userdata('iduser', $iduser);
                     $this->session->set_userdata('nama', $user_nama);
                 }
 
-                if ($cek_akses['user_level'] == '2') {
-                    $this->session->set_userdata('akses', '2');
+                if ($cek_akses['user_level'] == '1' or $cek_akses['user_level'] == '2') {
+                    $this->session->set_userdata('akses', '1');
                     $iduser = $cek_akses['user_id'];
                     $user_nama = $cek_akses['user_nama'];
                     $this->session->set_userdata('iduser', $iduser);
                     $this->session->set_userdata('nama', $user_nama);
                 } //Front Office
 
-                if ($this->session->userdata('akses') == 1) {
+                if ($this->session->userdata('akses') == 0) {
                     redirect('admin/dashboard');
-                } elseif ($this->session->userdata('akses') == 2) {
+                } elseif ($this->session->userdata('akses') == 1) {
                     redirect('user/dashboard');
                 }
             } else {
@@ -159,8 +159,26 @@ class Auth extends CI_Controller
                 redirect('auth/register');
             }
         } else {
-            echo $this->session->set_flashdata('info', 'GAGAL Upload File Terlalu Besar');
-            redirect('auth/register');
+                $nip = $this->input->post('nip');
+                $nama = $this->input->post('nama');
+                $password = $this->input->post('password');
+                $email = $this->input->post('email');
+                $wilayah = $this->input->post('wilayah');
+                $level = $this->input->post('level');
+                $data = array(
+                    'user_nama' => $nama,
+                    'user_nip' => $nip,
+                    'password' => md5($password),
+                    'region_id' => $wilayah,
+                    'email'     => $email,
+                    'user_level' => $level
+                );
+
+                // var_dump($data);
+                // die();
+                $this->m_user->simpan_user_tanpaImg('tbl_user', $data);
+                echo $this->session->set_flashdata('success', 'Akun telah berhasil dibuat');
+            redirect('auth');
         }
     }
 }

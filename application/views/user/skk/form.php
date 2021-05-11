@@ -38,17 +38,22 @@
               <div class="col-lg-3"></div>
               <div class="col-lg-6 p-4 border">
 
-                <form class="form-horizontal" method="post" action="<?php echo base_url() . 'user/user_lhkpn/simpan_form' ?>" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="<?php echo base_url() . 'user/user_skk/simpan_form' ?>" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label float-left">Masukkan Normor NIP</label>
                     <input class="form-control" type="text" name="nip" placeholder="123245678" id="nip">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label float-left">Masukkan Tanggal Surat</label>
+                    <input class="form-control" type="date" name="tanggal_surat_skk">
                   </div>
 
                   <div class="form-group p-1">
                     <h5 class="text-left">Upload File Permintaan SKK</h5>
                     <div class="custom-file">
 
-                      <input type="file" class="custom-file-input" name="file_pdf" id="customFileLang" lang="en">
+                      <input type="file" class="custom-file-input" name="file_pdf_skk" id="customFileLang" lang="en">
                       <label class="custom-file-label" for="customFileLang">Pilih file</label>
                     </div>
                   </div>

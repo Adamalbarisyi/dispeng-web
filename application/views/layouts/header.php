@@ -56,7 +56,11 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
+                  <?php if ($c['foto'] !=NULL): ?>
                   <img alt="Image placeholder" src="<?php echo base_url().'assets/pas_foto/'.$c['foto'];?>">
+                    <?php else: ?>
+                  <img alt="Image placeholder" src="<?php echo base_url().'assets/img/user_blank.png';?>">
+                  <?php endif; ?>
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?= $c['user_nama'] ?></span>

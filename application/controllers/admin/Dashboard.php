@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('m_employe');
 		$this->load->model('m_lhkpn');
 		$this->load->model('m_hukdis');
+		$this->load->model('m_skk');
 		$this->load->library('upload');
 	}
 
@@ -18,8 +19,10 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data['hukdis']=$this->m_hukdis->getHukdisAll();
-		$data['lhkpn']=$this->m_lhkpn->getLhkpnAll();
+		$data['lhkpn']=$this->m_lhkpn->getLhkpnProses();
 		$data['detail_lhkpn']=$this->m_lhkpn->getLhkpnVerif();
+		$data['skk']=$this->m_skk->getSkkProses();
+
 		$this->load->view('admin/dashboard/index',$data);
 	}
 	

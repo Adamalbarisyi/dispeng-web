@@ -34,6 +34,13 @@ class M_lhkpn extends CI_Model{
 		$hsl=$this->db->get();
 		return $hsl;
 	}
+	function ambilId($id){
+		$this->db->select('*');
+		$this->db->from('tbl_lhkpn');
+		$this->db->where('id_lhkpn',$id);
+		$hsl=$this->db->get();
+		return $hsl->row();
+	}
 
 	function download($id){
 	  $query = $this->db->get_where('tbl_lhkpn',array('id_lhkpn'=>$id));

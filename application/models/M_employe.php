@@ -20,5 +20,12 @@ class M_employe extends CI_Model{
         return $this->db->get('tbl_employe')->result();
     }
 
+    function cek_user($nip){
+		$this->db->select('*');
+		$this->db->where('nip',$nip);
+		$hsl=$this->db->get('tbl_employe');
+		return $hsl->row();
+	}
+
 	
 }
