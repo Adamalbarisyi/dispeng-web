@@ -32,25 +32,16 @@
                     <h5 class="card-title text-uppercase text-muted mb-0">DATA PEGAWAI</h5>
                   </div>
                 </div>
-                <p class="mt-3 mb-0 text-sm">
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class=" text-success m-3">Terverifikasi</strong></h4>
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class="text-warning m-3">Dalam Proses</strong></h4>
-                </p>
-              </div>
-            </div>
-          </div>
+                <?php $result = $this->db->get('tbl_employe');
+                $result = $this->db->query("SELECT * FROM tbl_employe WHERE status='0'");
+                $jumlah = $result->num_rows();
 
-          <div class="col-xl-3 col-md-6">
-            <div class="card card-stats">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">DATA HUKDIS</h5>
-                  </div>
-                </div>
+                $result1 = $this->db->query("SELECT * FROM tbl_employe WHERE status='1'");
+                $jumlah1 = $result1->num_rows();
+                ?>
                 <p class="mt-3 mb-0 text-sm">
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class=" text-success m-3">Terverifikasi</strong></h4>
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class="text-warning m-3">Dalam Proses</strong></h4>
+                <h4 class=" mr-2"><span class="text-default m-3"> <?php echo $jumlah; ?></span> <strong class=" text-success m-3">Aktif</strong></h4>
+                <h4 class=" mr-2"><span class="text-default m-3"> <?php echo $jumlah1; ?></span> <strong class="text-warning m-3">Tidak Aktif</strong></h4>
                 </p>
               </div>
             </div>
@@ -64,9 +55,38 @@
                     <h5 class="card-title text-uppercase text-muted mb-0">DATA LHKPN</h5>
                   </div>
                 </div>
+                <?php $result = $this->db->get('tbl_lhkpn');
+                $result = $this->db->query("SELECT * FROM tbl_lhkpn WHERE status_proses='0'");
+                $jumlah = $result->num_rows();
+
+                $result1 = $this->db->query("SELECT * FROM tbl_lhkpn WHERE status_proses='1'");
+                $jumlah1 = $result1->num_rows();
+                ?>
+
                 <p class="mt-3 mb-0 text-sm">
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class=" text-success m-3">Terverifikasi</strong></h4>
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class="text-warning m-3">Dalam Proses</strong></h4>
+                <h4 class=" mr-2"><span class="text-default m-3"> <?php echo $jumlah1; ?></span> <strong class=" text-success m-3">Terverifikasi</strong></h4>
+                <h4 class=" mr-2"><span class="text-default m-3"> <?php echo $jumlah; ?></span> <strong class="text-warning m-3">Dalam Proses</strong></h4>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">DATA HUKDIS</h5>
+                  </div>
+                </div>
+                <?php $result = $this->db->get('tbl_hukdis');
+                $result = $this->db->query("SELECT * FROM tbl_hukdis");
+                $jumlah = $result->num_rows();
+
+                ?>
+                <p class="mt-3 mb-0 text-sm">
+                <h4 class=" mr-2 pt-0 pb-4"><span class="text-default m-3"> <?php echo $jumlah; ?></span> <strong class=" text-success m-3">File Berkas</strong></h4>
+
                 </p>
               </div>
             </div>
@@ -80,9 +100,16 @@
                     <h5 class="card-title text-uppercase text-muted mb-0">DATA SKK</h5>
                   </div>
                 </div>
+                <?php $result = $this->db->get('tbl_skk');
+                $result = $this->db->query("SELECT * FROM tbl_skk WHERE status_proses='0'");
+                $jumlah = $result->num_rows();
+
+                $result1 = $this->db->query("SELECT * FROM tbl_skk WHERE status_proses='1'");
+                $jumlah1 = $result1->num_rows();
+                ?>
                 <p class="mt-3 mb-0 text-sm">
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class=" text-success m-3">Terverifikasi</strong></h4>
-                <h4 class=" mr-2"><span class="text-default m-3"> 67</span> <strong class="text-warning m-3">Dalam Proses</strong></h4>
+                <h4 class=" mr-2"><span class="text-default m-3"> <?php echo $jumlah1; ?></span> <strong class=" text-success m-3">Terverifikasi</strong></h4>
+                <h4 class=" mr-2"><span class="text-default m-3"> <?php echo $jumlah; ?></span> <strong class="text-warning m-3">Dalam Proses</strong></h4>
                 </p>
               </div>
             </div>
@@ -107,6 +134,17 @@
               <h2 class="text-white">Selamat datang di halaman dashboard User <strong> <?= $c['user_nama'] ?></strong></h2>
             </div>
 
+            <?php if ($this->session->flashdata('success')) { ?>
+              <div class="pt-4 pb-0 pl-4 pr-4">
+                <div class="alert alert-success" role="alert">
+                  <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                  <span class="alert-text"><strong>Succes!</strong> <?php echo $this->session->flashdata('success'); ?></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+            <?php } ?>
             <div class="nav-wrapper">
               <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                 <li class="nav-item">
@@ -256,7 +294,7 @@
                           <?php
                           $no = 1;
                           foreach ($skk->result_array() as $i) :
-                            $id=$i['id_skk'];
+                            $id = $i['id_skk'];
                             $nip = $i['nip'];
                             $nama = $i['nama'];
                             $file = $i['file'];
@@ -290,7 +328,7 @@
                                     Detail
                                   </button>
                                 <?php else : ?>
-                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail_proses<?= $id;?>">
+                                  <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail_proses<?= $id; ?>">
                                     Detail
                                   </button>
                                 <?php endif; ?>
@@ -335,34 +373,33 @@
 
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="detail-nip" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="NOMOR NIP" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="NOMOR NIP" id="detail-nip" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="detail-pengajuan" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="Tanggal Pengajuan" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="Tanggal Pengajuan" id="detail-pengajuan" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
+              <label for="tanggal-verif" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="tanggal verifikasi" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="tanggal verifikasi" id="tanggal-verif" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
+              <label for="diverif-oleh" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="verifikator" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="verifikator" id="diverif-oleh" disabled>
               </div>
             </div>
 
-            <h4></h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -393,26 +430,26 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          
+
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="proses-nip" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="proses-nip" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="tanggal-pengajuan-" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="tanggal-pengajuan-" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
+              <label for="status-verif" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="status-verif" disabled>
               </div>
             </div>
           </div>
@@ -423,11 +460,20 @@
       </div>
     </div>
   <?php endforeach; ?>
-  
-    <!-- Modal Detail SKK -->
 
+  <!-- Modal Detail SKK -->
+  <?php
+  foreach ($skk->result_array() as $i) :
+    $id = $i['id_skk'];
+    $nip = $i['nip'];
+    $nama = $i['nama'];
+    $file = $i['file'];
+    $status = $i['status_proses'];
+    $tgl_pengajuan = $i['created_at'];
+    $tgl_verif = $i['updated_at'];
+  ?>
     <!-- Modal Detail -->
-    <div class="modal fade" id="modal-detail-skk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-detail-skk<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -439,34 +485,33 @@
 
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="skk-nip" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="NOMOR NIP" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="NOMOR NIP" id="skk-nip" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="skk-pengajuan" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="Tanggal Pengajuan" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="Tanggal Pengajuan" id="skk-pengajuan" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
+              <label for="tanggal-verif" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="tanggal verifikasi" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="tanggal verifikasi" id="tanggal-verif" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
+              <label for="diverif-oleh" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="verifikator" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="verifikator" id="diverif-oleh" disabled>
               </div>
             </div>
 
-            <h4></h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -474,52 +519,62 @@
         </div>
       </div>
     </div>
-
+  <?php endforeach; ?>
   <!-- Modal detail proses SKK-->
 
-    <!-- Modal detail proses -->
-    <div class="modal fade" id="modal-detail-skk-proses" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detail SKK</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          
-          <div class="modal-body">
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
-              </div>
-            </div>
+  <?php
+  foreach ($skk->result_array() as $i) :
+    $id = $i['id_skk'];
+    $nip = $i['nip'];
+    $nama = $i['nama'];
+    $file = $i['file'];
+    $status = $i['status_proses'];
+    $tgl_pengajuan = $i['created_at'];
+    $tgl_verif = $i['updated_at'];
+  ?>
+  <!-- Modal detail proses -->
+  <div class="modal fade" id="modal-detail-skk-proses" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detail SKK</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
-              </div>
+        <div class="modal-body">
+          <div class="form-group row mb-2">
+            <label for="nomor-nip" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="<?php echo $nip; ?>" id="nomor-nip" disabled>
             </div>
+          </div>
 
-            <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
-              <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
-              </div>
+          <div class="form-group row mb-2">
+            <label for="skk-pengajuan" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="skk-pengajuan" disabled>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+          <div class="form-group row mb-2">
+            <label for="status-verif" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="status-verif" disabled>
+            </div>
           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
+  <?php endforeach; ?>
 
-
-    <!-- MODAL DETAIL SKK PROSES -->
-    <?php
+  <!-- MODAL DETAIL SKK PROSES -->
+  <?php
   foreach ($skk->result_array() as $i) :
     $id = $i['id_skk'];
     $nip = $i['nip'];
@@ -542,28 +597,25 @@
 
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="nomor-nip" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="nomor-nip" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="tanggal-pengajuan" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="tanggal-pengajuan" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
+              <label for="diverif-oleh" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="diverif-oleh" disabled>
               </div>
             </div>
-
-
-            <h4></h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

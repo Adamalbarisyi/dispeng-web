@@ -35,11 +35,8 @@
                 </div>
               </div>
               <!-- Light table -->
-
-
-
               <div class="table-responsive">
-          <table class="table align-items-center table-flush">
+                <table class="table align-items-center table-flush" id="datatable-basic">
                   <thead class="thead-light">
                     <tr>
                       <th>NIP</th>
@@ -50,100 +47,103 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                      foreach ($lhkpn->result_array() as $i):
-                        $id=$i['id_lhkpn'];
-                          $nip=$i['nip'];
-                          $nama=$i['nama'];
-                          $file=$i['file'];
-                          $status=$i['status_proses'];
-                        ?>
-                    <tr>
-                      
-                      <td class="table-user">
-                        <b><?php echo $nip; ?></b>
-                      </td>
-                      <td><?php echo $nama; ?></td>
-                      <td><?php echo $file; ?></td>
-                      <?php if ($status==0): ?>
-                      <td>Dalam Proses</td>
-                      <?php elseif ($status==1): ?>
-                        <td>Terverivikasi</td>
-                      <?php endif; ?>
-                      
-                      <td class="text-center justify-content-between">
-                        <a href="<?= base_url('admin/lhkpn/download/').$file; ?>">
-                           <button type="button" class="table-action btn btn-sm btn-danger text-white">
-                          Download
-                        </button>
-                        </a>
-                     
-                       <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#exampleModal<?php echo $id;?>">
-                          Verifikasi
-                        </button>
-                        
-                      </td>
+                    <?php
+                    foreach ($lhkpn->result_array() as $i) :
+                      $id = $i['id_lhkpn'];
+                      $nip = $i['nip'];
+                      $nama = $i['nama'];
+                      $file = $i['file'];
+                      $status = $i['status_proses'];
+                    ?>
+                      <tr>
 
-                    </tr>
-                  <?php endforeach; ?>
+                        <td class="table-user">
+                          <b><?php echo $nip; ?></b>
+                        </td>
+                        <td><?php echo $nama; ?></td>
+                        <td><?php echo $file; ?></td>
+                        <?php if ($status == 0) : ?>
+                          <td>Dalam Proses</td>
+                        <?php elseif ($status == 1) : ?>
+                          <td>Terverivikasi</td>
+                        <?php endif; ?>
+
+                        <td class="text-center justify-content-between">
+                          <a href="<?= base_url('admin/lhkpn/download/') . $file; ?>">
+                            <button type="button" class="table-action btn btn-sm btn-danger text-white">
+                              Download
+                            </button>
+                          </a>
+
+                          <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#exampleModal<?php echo $id; ?>">
+                            Verifikasi
+                          </button>
+
+                        </td>
+
+                      </tr>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
 
+
+
+
         </div>
       </div>
     </div>
   </div>
 
-  <?php 
+  <?php
 
- foreach ($lhkpn->result_array() as $i):
-                        $id=$i['id_lhkpn'];
-                          $nip=$i['nip'];
-                          $nama=$i['nama'];
-                          $file=$i['file'];
-                          $status=$i['status_proses'];
-   ?>
-    <div class="modal fade" id="exampleModal<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Verifikasi File</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form class="form-horizontal" method="post" action="<?php echo base_url().'admin/lhkpn/update_lhkpn'?>" enctype="multipart/form-data">
-                                  <input type="hidden" name="file" value="<?php echo $file;?>">
-                                  <input type="hidden" name="id_lhkpn" value="<?php echo $id;?>">
-                                  <input type="hidden" name="nip" value="<?php echo $nip;?>">
+  foreach ($lhkpn->result_array() as $i) :
+    $id = $i['id_lhkpn'];
+    $nip = $i['nip'];
+    $nama = $i['nama'];
+    $file = $i['file'];
+    $status = $i['status_proses'];
+  ?>
+    <div class="modal fade" id="exampleModal<?php echo $id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Verifikasi File</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" method="post" action="<?php echo base_url() . 'admin/lhkpn/update_lhkpn' ?>" enctype="multipart/form-data">
+              <input type="hidden" name="file" value="<?php echo $file; ?>">
+              <input type="hidden" name="id_lhkpn" value="<?php echo $id; ?>">
+              <input type="hidden" name="nip" value="<?php echo $nip; ?>">
 
 
-                                  <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label float-left">Masukkan Normor NIP</label>
-                                    <input class="form-control" type="text" name="nip" value="<?= $nip; ?>" id="example-text-input" disabled>
-                                  </div>
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label float-left">Masukkan Normor NIP</label>
+                <input class="form-control" type="text" name="nip" value="<?= $nip; ?>" id="example-text-input" disabled>
+              </div>
 
-                               <div class="form-group">
-                               <h5 class="text-left">Upload File LHKPN</h5>
-                               <div class="custom-file">
-                                    
-                                    <input type="file" name="new_file" class="custom-file-input" id="customFileLang" lang="en">
-                                    <label class="custom-file-label"  for="customFileLang">Pilih file</label>
-                                  </div>
-                               </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                              </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      <?php endforeach; ?>
+              <div class="form-group">
+                <h5 class="text-left">Upload File LHKPN</h5>
+                <div class="custom-file">
+
+                  <input type="file" name="new_file" class="custom-file-input" id="customFileLang" lang="en">
+                  <label class="custom-file-label" for="customFileLang">Pilih file</label>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <?php endforeach; ?>
 
   <?php $this->load->view('layouts/footer') ?>

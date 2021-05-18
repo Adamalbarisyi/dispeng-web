@@ -57,6 +57,7 @@ class Employe extends CI_Controller {
 			);
 
 		$this->m_employe->simpan_employe('tbl_employe', $data);
+		echo $this->session->set_flashdata('success', ' berhasil ditambahkan');
 				redirect('user/employe/data_employe');
 		
 	}

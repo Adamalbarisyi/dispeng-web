@@ -1,8 +1,8 @@
-<div class="container-fluid fixed-bottom">
+<div class="container-fluid ">
   <div class="row justify-content-center">
     <div class="col-12">
       <!-- Footer -->
-      <footer class="footer p-4 position-relative">
+      <footer class="footer p-4 fixed-bottom position-relative">
         <div class="row align-items-center justify-content-lg-center">
           <div class="col-lg-6">
             <div class="copyright text-center text-lg-left text-muted">

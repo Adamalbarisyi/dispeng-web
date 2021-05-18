@@ -19,7 +19,7 @@ function __construct(){
 	public function index()
 	{
 		$data['hukdis']=$this->m_hukdis->getHukdisAll();
-		$data['lhkpn']=$this->m_lhkpn->getLhkpnAll();
+		$data['lhkpn']=$this->m_lhkpn->getLhkpnProses();
 		$data['detail_lhkpn']=$this->m_lhkpn->getLhkpnVerif();
 		$data['skk']=$this->m_skk->getSkkProses();
 

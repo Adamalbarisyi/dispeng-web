@@ -31,7 +31,6 @@
                     <h3 class="mb-0">LHKPN</h3>
                   </div>
                   <div>
-                    <p class="text-danger mt-4"><?php echo $this->session->flashdata('msg'); ?></p>
                   </div>
                   <div class="col-6">
                     <div class="float-right">
@@ -40,77 +39,155 @@
                           <i class="ni ni-fat-add fa-1x p-2"></i>Tambah Data LHKPN
                         </button>
                       </a>
-
                     </div>
                   </div>
+                </div>
+              </div>
+              
+              <?php if ($this->session->flashdata('success')) {?>
+                  <div class="pt-4 pb-0 pl-4 pr-4">
+                    <div class="alert alert-success" role="alert">
+                      <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                      <span class="alert-text"><strong>Succes!</strong> <?php echo $this->session->flashdata('success'); ?></span>
+                    </div>
+                    </div>
+                    <?php } ?>
 
+              <div class="card-body">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">Data LHKPN</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">Data HUKDIS</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card shadow">
+                  <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                        <div class="table-responsive py-4">
+
+                          <table class="table table-flush display"  id="table1">
+                            <thead class="thead-light">
+                              <tr class="text-center">
+                                <th>No</th>
+                                <th>NIP</th>
+                                <th>Nama</th>
+                                <th>File</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $no = 1;
+                              foreach ($lhkpn->result_array() as $i) :
+                                $id = $i['id_lhkpn'];
+                                $nip = $i['nip'];
+                                $nama = $i['nama'];
+                                $file = $i['file'];
+                                $status = $i['status_proses'];
+                              ?>
+                                <tr class="text-center">
+
+                                  <td><?php echo $no++ ?></td>
+                                  <td class="table-user">
+                                    <b><?php echo $nip; ?></b>
+                                  </td>
+                                  <td><?php echo $nama; ?></td>
+                                  <td><?php echo $file; ?></td>
+                                  <?php if ($status == 0) : ?>
+                                    <td> <span class="badge-md badge-pill badge-success">Dalam Proses</span></td>
+                                  <?php elseif ($status == 1) : ?>
+                                    <td> <span class="badge-md badge-pill badge-success">Terverifikasi</span></td>
+                                  <?php endif; ?>
+
+                                  <td class="text-center justify-content-between">
+                                    <?php if ($status == 1) : ?>
+                                      <a href="<?= base_url('user/user_lhkpn/download/') . $file; ?>">
+                                        <button type="button" class="table-action btn btn-sm btn-danger text-white">
+                                          Download
+                                        </button>
+                                      </a>
+                                      <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail<?php echo $id; ?>">
+                                        Detail
+                                      </button>
+                                    <?php else : ?>
+                                      <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail_proses<?= $id; ?>">
+                                        Detail
+                                      </button>
+                                    <?php endif; ?>
+                                  </td>
+                                </tr>
+                              <?php endforeach; ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+                        <div class="table-responsive py-4">
+                          <table class="table table-flush display" id="table2">
+                            <thead class="thead-light">
+                              <tr class="text-center">
+                                <th>No</th>
+                                <th>NIP</th>
+                                <th>Nama</th>
+                                <th>Tgl Lapor</th>
+                                <th>No Surat</th>
+                                <th>kat. Hukuman</th>
+                                <th>File</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $no = 1;
+                              foreach ($hukdis->result_array() as $i) :
+                                $nip = $i['nip'];
+                                $nama = $i['nama'];
+                                $tgl_lapor = $i['tanggal_pelaporan'];
+                                $no_surat = $i['no_surat'];
+                                $kategori_hukuman = $i['jenis_hukuman'];
+                                $file = $i['file'];
+                              ?>
+                                <tr class="text-center">
+
+                                  <td><?php echo $no++ ?></td>
+                                  <td class="table-user">
+                                    <b><?php echo $nip; ?></b>
+                                  </td>
+                                  <td><?php echo $nama; ?></td>
+                                  <td><?php echo date("d-m-Y", strtotime($tgl_lapor)) ?></td>
+                                  <td><?php echo $no_surat; ?></td>
+                                  <td><?php echo $kategori_hukuman; ?></td>
+                                  <td><?php echo $file; ?></td>
+
+                                  <td class="text-center justify-content-between">
+
+                                    <a href="<?= base_url('user/user_hukdis/download/') . $file; ?>">
+                                      <button type="button" class="table-action btn btn-sm btn-danger text-white">
+                                        Download
+                                      </button>
+                                    </a>
+                                  </td>
+
+                                </tr>
+                              <?php endforeach; ?>
+                            </tbody>
+                          </table>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- Light table -->
-              <div class="table-responsive py-4">
 
-                <table class="table table-flush" id="datatable-basic">
-                  <thead class="thead-light">
-                    <tr class="text-center">
-                      <th>No</th>
-                      <th>NIP</th>
-                      <th>Nama</th>
-                      <th>File</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($lhkpn->result_array() as $i) :
-                      $id = $i['id_lhkpn'];
-                      $nip = $i['nip'];
-                      $nama = $i['nama'];
-                      $file = $i['file'];
-                      $status = $i['status_proses'];
-                    ?>
-                      <tr class="text-center">
-
-                        <td><?php echo $no++ ?></td>
-                        <td class="table-user">
-                          <b><?php echo $nip; ?></b>
-                        </td>
-                        <td><?php echo $nama; ?></td>
-                        <td><?php echo $file; ?></td>
-                        <?php if ($status == 0) : ?>
-                          <td>    <span class="badge-md badge-pill badge-success">Dalam Proses</span></td>
-                        <?php elseif ($status == 1) : ?>
-                          <td>    <span class="badge-md badge-pill badge-success">Terverifikasi</span></td>
-                        <?php endif; ?>
-
-                        <td class="text-center justify-content-between">
-                          <?php if ($status == 1) : ?>
-                            <a href="<?= base_url('user/user_lhkpn/download/') . $file; ?>">
-                              <button type="button" class="table-action btn btn-sm btn-danger text-white">
-                                Download
-                              </button>
-                            </a>
-                            <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail<?php echo $id; ?>">
-                              Detail
-                            </button>
-                          <?php else : ?>
-                            <button type="button" class="table-action btn btn-sm btn-primary text-white" data-original-title="Verifikasi" data-toggle="modal" data-target="#modal-detail_proses<?= $id; ?>">
-                              Detail
-                            </button>
-
-
-
-                          <?php endif; ?>
-                        </td>
-
-                      </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-
-
-              </div>
             </div>
           </div>
 
@@ -143,34 +220,32 @@
 
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="nomor-nip-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="nomor-nip-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="tanggal-pengajuan-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="tanggal-pengajuan-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
+              <label for="tanggal-verif-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_verif; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_verif; ?>" id="tanggal-verif-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
+              <label for="diverif-oleh-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $verifikator; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $verifikator; ?>" id="diverif-oleh-<?=$id?>" disabled>
               </div>
             </div>
-
-            <h4></h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -199,26 +274,25 @@
             </button>
           </div>
 
-
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="lhkpn-nomor-nip-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="lhkpn-nomor-nip-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="lhkpn-tanggal-pengajuan-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="lhkpn-tanggal-pengajuan-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
+              <label for="lhkpn-status-verif<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="lhkpn-status-verif<?=$id?>" disabled>
               </div>
             </div>
 

@@ -31,7 +31,6 @@
                     <h3 class="mb-0">SKK</h3>
                   </div>
                   <div>
-                    <p class="text-danger mt-4"><?php echo $this->session->flashdata('msg'); ?></p>
                   </div>
                   <div class="col-6">
                     <div class="float-right">
@@ -45,6 +44,15 @@
                   </div>
 
                 </div>
+
+                <?php if ($this->session->flashdata('success')) {?>
+                  <div class="pt-4 pb-0 pl-4 pr-4">
+                    <div class="alert alert-success" role="alert">
+                      <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                      <span class="alert-text"><strong>Succes!</strong> <?php echo $this->session->flashdata('success'); ?></span>
+                    </div>
+                    </div>
+                    <?php } ?>
               </div>
               <!-- Light table -->
               <div class="table-responsive py-4">
@@ -78,10 +86,9 @@
                         </td>
                         <td><?php echo $nama; ?></td>
                         <td><?php echo $file; ?></td>
-                        <?php if ($status == 0) : ?>
-                          <td>Dalam Proses</td>
-                        <?php elseif ($status == 1) : ?>
-                          <td>Terverivikasi</td>
+                   
+                        <?php if ($status == 1) : ?>
+                          <td> <span class="badge-md badge-pill badge-success">Terverifikasi</span></td>
                         <?php endif; ?>
 
                         <td class="text-center justify-content-between">
@@ -143,30 +150,30 @@
 
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="nomor-nip-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="nomor-nip-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="tanggal-pengajuan-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="tanggal-pengajuan-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
+              <label for="tanggal-verif-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Tanggal Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_verif; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_verif; ?>" id="tanggal-verif-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
+              <label for="diverif-oleh-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Diverifikasi Oleh</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $verifikator; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $verifikator; ?>" id="diverif-oleh-<?=$id?>" disabled>
               </div>
             </div>
 
@@ -203,23 +210,23 @@
 
           <div class="modal-body">
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
+              <label for="proses-no-nip-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $nip; ?>" id="proses-no-nip-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
+              <label for="proses-tanggal-pengajuan-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Tanggal Pengajuan</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php echo $tgl_pengajuan; ?>" id="proses-tanggal-pengajuan-<?=$id?>" disabled>
               </div>
             </div>
 
             <div class="form-group row mb-2">
-              <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
+              <label for="proses-status-verif-<?=$id?>" class="col-md-4 col-form-label form-control-label text-left">Status Verifikasi</label>
               <div class="col-md-8">
-                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="example-text-input" disabled>
+                <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Dalam Proses Verifikasi <?php else : ?> Terverivikasi <?php endif; ?> " id="proses-status-verif-<?=$id?>" disabled>
               </div>
             </div>
 

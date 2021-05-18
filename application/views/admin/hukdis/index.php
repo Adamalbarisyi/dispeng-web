@@ -34,14 +34,14 @@
                     <p class="text-danger mt-4"><?php echo $this->session->flashdata('msg'); ?></p>
                   </div>
                   <div class="col-6">
-                    <div class="float-right">
+                    <!-- <div class="float-right">
                       <a href="<?= base_url() . 'user/user_hukdis/form' ?>">
                         <button type="button" class="table-action btn btn-sm btn-warning text-white">
                           <i class="ni ni-fat-add fa-1x p-2"></i>Tambah Data HUKDIS
                         </button>
                       </a>
 
-                    </div>
+                    </div> -->
                   </div>
 
                 </div>

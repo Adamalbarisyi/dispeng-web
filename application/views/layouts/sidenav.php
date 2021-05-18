@@ -45,10 +45,10 @@
             <div class="collapse" id="pegawai">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                  <a href="<?= base_url('user/employe/data_employe') ?>" class="nav-link">Data Pegawai</a>
+                  <a href="<?= base_url('admin/employe/data_employe') ?>" class="nav-link">Data Pegawai</a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('user/employe') ?>" class="nav-link">Input Pegawai</a>
+                  <a href="<?= base_url('admin/employe') ?>" class="nav-link">Input Pegawai</a>
                 </li>
 
               </ul>
@@ -62,9 +62,9 @@
             </a>
             <div class="collapse" id="lhkpn">
               <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="<?= base_url('admin/lhkpn/verif') ?>" class="nav-link">Verifikasi LHKPN</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <a href="<?= base_url('admin/lhkpn') ?>" class="nav-link">Data LHKPN</a>
                 </li>
@@ -104,9 +104,9 @@
             </a>
             <div class="collapse" id="skk">
               <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="<?= base_url('admin/skk/verif') ?>" class="nav-link">Verifikasi SKK</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <a href="<?= base_url('admin/skk') ?>" class="nav-link">Data SKK</a>
                 </li>
