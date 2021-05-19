@@ -87,17 +87,17 @@
                       <div class="row">
                         <div class="col-lg-4">
                           <div class="custom-control custom-checkbox mt-2">
-                            <input class="custom-control-input" id="aktif" type="checkbox" name="status" value="0">
+                            <input class="custom-control-input" id="aktif" type="checkbox" name="status" value="0"  onchange="valueStatus(this)">
                             <label class="custom-control-label" for="aktif">Aktif</label>
                           </div>
                         </div>
                         <div class="col-lg-8">
                           <div class="custom-control custom-checkbox mt-2">
-                            <input class="custom-control-input" id="tidak-aktif" type="checkbox" name="status" value="1" >
+                            <input class="custom-control-input" id="tidak-aktif" type="checkbox" name="status" value="1" onchange="valueStatus(this)" >
                             <label class="custom-control-label" for="tidak-aktif">Tidak Aktif</label>
                           </div>
 
-                          <select name="keterangan" class="form-control mt-3" id='select-status'>
+                          <select name="keterangan" class="form-control mt-3" id='select-status' style="display: none;">
                             <option value=NULL>Pilih status</option>
                             <option value="Mutasi">Mutasi</option>
                             <option value="Pensiun">Pensiun</option>

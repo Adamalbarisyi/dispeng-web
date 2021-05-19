@@ -68,20 +68,20 @@
                     <div class="col-md-8">
                       <div class="col-lg-12 p-0">
                         <div class="custom-control custom-checkbox mt-2">
-                          <input class="custom-control-input" value="0" id="tidak-wajib" type="checkbox" name="status-hukdis" required>
+                          <input class="custom-control-input" value="0" id="tidak-wajib" type="checkbox" name="status-hukdis" onchange="valueHukdis(this)">
                           <label class="custom-control-label" for="tidak-wajib">TIDAK ADA</label>
                         </div>
                       </div>
                       <div class="col-lg-12 p-0">
                         <div class="custom-control custom-checkbox mt-2">
-                          <input class="custom-control-input" value="1" id="wajib" type="checkbox" name="status-hukdis" required>
+                          <input class="custom-control-input" value="1" id="wajib" type="checkbox" name="status-hukdis" onchange="valueHukdis(this)">
                           <label class="custom-control-label" for="wajib">ADA</label>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div id='select-hukdis'>
+                  <div id='select-hukdis' style="display: none;">
                     <h2 class="pt-2 pb-2">Upload File HUKDIS</h2>
                     <div class="form-group row">
                       <label for="tanggal-pengajuan" class="col-md-4 col-form-label form-control-label">Tanggal Pengajuan
