@@ -192,57 +192,110 @@
                                   </button>
                                 </div>
 
-                                <form action="#" method="post">
+                                <form action="<?= base_url().'admin/employe/update_employe' ?>" method="post">
+                                  <input type="hidden" name="id" value="<?= $id; ?>">
                                   <div class="modal-body">
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nama Lengkap</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="<?php echo $nama; ?>">
+                                        <input class="form-control" name="nama" type="text" value="<?php echo $nama; ?>">
                                       </div>
                                     </div>
 
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NIP</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="<?php echo $nip; ?>">
+                                        <input class="form-control" type="text" name="nip" value="<?php echo $nip; ?>">
                                       </div>
                                     </div>
 
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Nomor NRP</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="<?php echo $nrp; ?>">
+                                        <input class="form-control" type="text" name="nrp" value="<?php echo $nrp; ?>">
                                       </div>
                                     </div>
 
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Pangkat Golongan</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="<?php echo $pangkat_gol; ?>">
+                                        <input class="form-control" type="text" name="golongan" value="<?php echo $pangkat_gol; ?>">
                                       </div>
                                     </div>
 
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Jabatan</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="<?php echo $jabatan; ?>">
+                                        <input class="form-control" type="text" name="jabatan" value="<?php echo $jabatan; ?>">
                                       </div>
                                     </div>
 
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Unit Kerja</label>
                                       <div class="col-md-8">
-                                        <input class="form-control" type="text" value="KADIV 3">
+                                        <input class="form-control" type="text" name="unit" value="KADIV 3">
                                       </div>
                                     </div>
 
                                     <div class="form-group row mb-2">
+                                      <label for="status-pegawai" class="col-md-4 col-form-label form-control-label">Status Pegawai
+                                        <span class="font-weight-bold float-right">:</span></label>
+                                      <div class="col-md-8">
+                                        <?php if ($status==0): ?>
+                                        <div class="row">
+                                          <div class="col-lg-4">
+                                            <div class="custom-control custom-checkbox mt-2">
+                                              <input class="custom-control-input" id="aktif" type="radio" name="status" value="0"  onchange="editHukdis(this)" checked>
+                                              <label class="custom-control-label text-dark" for="aktif">Aktif</label>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-8">
+                                            <div class="custom-control custom-checkbox mt-2">
+                                              <input class="custom-control-input" id="tidak-aktif" type="radio" name="status" value="1" onchange="editHukdis(this)" >
+                                              <label class="custom-control-label text-dark" for="tidak-aktif">Tidak Aktif</label>
+                                            </div>
+
+                                            <select name="keterangan" class="form-control mt-3" id='select-status' style="display: none;">
+                                              <option value=NULL>Pilih status</option>
+                                              <option value="Mutasi">Mutasi</option>
+                                              <option value="Pensiun">Pensiun</option>
+                                              <option value="Meninggal">Meninggal</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <?php else: ?>
+                                          <div class="row">
+                                          <div class="col-lg-4">
+                                            <div class="custom-control custom-checkbox mt-2">
+                                              <input class="custom-control-input" id="aktif" type="radio" name="status" value="0"  onchange="editHukdis(this)">
+                                              <label class="custom-control-label text-dark" for="aktif">Aktif</label>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-8">
+                                            <div class="custom-control custom-checkbox mt-2">
+                                              <input class="custom-control-input" id="tidak-aktif" type="radio" name="status" value="1" onchange="editHukdis(this)" checked >
+                                              <label class="custom-control-label text-dark" for="tidak-aktif">Tidak Aktif</label>
+                                            </div>
+
+                                            <select name="keterangan" class="form-control mt-3" id='select-status'>
+                                              <option value="<?= $keterangan ?>"><?= $keterangan ?></option>
+                                              <option value="Mutasi">Mutasi</option>
+                                              <option value="Pensiun">Pensiun</option>
+                                              <option value="Meninggal">Meninggal</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                      <?php endif; ?>
+                                      </div>
+                                    </div>
+
+                                    <!-- <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Status Pegawai</label>
                                       <div class="col-md-8">
                                         <input class="form-control" type="text" value="<?php if ($status == 0) : ?> Aktif <?php else : ?> <?= $keterangan ?>
                                         <?php endif; ?>">
                                       </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group row mb-2">
                                       <label for="example-text-input" class="col-md-4 col-form-label form-control-label text-left">Email</label>
@@ -252,6 +305,7 @@
                                     </div>
                                   </div>
                                   <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" >Save</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                   </div>
                                 </form>
@@ -270,7 +324,8 @@
                                   </button>
                                 </div>
 
-                                <form action="#" method="post">
+                                <form action="<?= base_url().'admin/employe/soft_delete' ?>" method="post">
+                                  <input type="hidden" name="id" value="<?= $id; ?>">
                                   <div class="modal-body">
                                     <div class="col-md-12">
                                       <div class="text-dark">Apakah anda yakin untuk menghapus data pegawai dengan</div>
@@ -280,7 +335,7 @@
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary">Iya</button>
+                                  <button type="submit" class="btn btn-primary">Iya</button>
                                   <button type="button" class="btn btn-danger" data-dismiss="modal">tidak</button>
                                   </div>
                                 </form>

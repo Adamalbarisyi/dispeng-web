@@ -42,3 +42,17 @@ $("table.display").DataTable();
   }
   
 
+  function editHukdis(obj)
+  {
+	var cbs = document.getElementsByClassName("custom-control-input");
+	for (var i = 0; i < cbs.length; i++) {
+        cbs[i].checked = false;
+         
+    }
+    obj.checked = true;
+	
+	 if($('#tidak-aktif').is(":checked"))   
+		  $("#select-status").show();
+	  else
+		  $("#select-status").hide(); 
+  }

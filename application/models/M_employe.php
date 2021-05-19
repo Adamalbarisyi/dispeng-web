@@ -8,6 +8,7 @@ class M_employe extends CI_Model{
 	function getEmployeAll(){
 		$this->db->select('*');
 		$this->db->from('tbl_employe');
+		$this->db->where('is_delete',1);
 		$this->db->join('tbl_region', 'tbl_employe.region = tbl_region.region_id');
 		$hsl=$this->db->get();
 		return $hsl;
@@ -26,6 +27,15 @@ class M_employe extends CI_Model{
 		$hsl=$this->db->get('tbl_employe');
 		return $hsl->row();
 	}
+	 function update_employe($table,$data, $id){
+	 	$this->db->where('id', $id);
+		$this->db->update($table, $data);
+	 }
+
+	 function soft_delete($table,$data, $id){
+	 	$this->db->where('id',$id);
+	 	$this->db->update($table, $data);
+	 }
 
 	
 }
